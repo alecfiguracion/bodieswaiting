@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODIES-Waiting</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+
+<body>
+
+        <div id="container" class="container">
+            <header class="bodies-header-1">
+                <div>
+                    <span>BODIES</span>
+                    <span class="bodies-header-2">, Waiting</span>
+                </div>
+            </header>
+            <video autoplay muted loop id="bgvideo">
+                <source src="assets/Pigeons_Flying.mp4" type="video/mp4">
+            </video>
+            <div>
+                <img src="assets/Woman_Feeding_Pigeons.jpg" class="img5" style="top: 1200px; left: 1235px; width: auto">
+                <img src="assets/Man_Sitting.jpg" class="img" style="top: 450px; left: 280px; width: auto">
+                <img src="assets/Behind_Glass.jpg" class="img" style="top: 125px; left: 380px; width: auto">
+                <img src="assets/Woman_Cold.jpg" class="img3" style="top: 380px; right: 1390px; width: auto">
+                <img src="assets/Man_Leaning.jpg" class="img2" style="bottom: 75px; left: 180px; width: auto">
+                <img src="assets/Flying_Pigeons.jpg" class="img2" style="bottom: 580px; left: 93px; width: auto">
+                <img src="assets/Bus_Crowd.jpg" class="img" style="top: 500px; right: 355px; width: auto">
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const ele = document.getElementById('container');
+                ele.style.cursor = 'grab';
+    
+                let pos = { top: 0, left: 0, x: 0, y: 0 };
+    
+                const mouseDownHandler = function (e) {
+                    ele.style.cursor = 'grabbing';
+                    ele.style.userSelect = 'none';
+    
+                    pos = {
+                        left: ele.scrollLeft,
+                        top: ele.scrollTop,
+                        // Get the current mouse position
+                        x: e.clientX,
+                        y: e.clientY,
+                    };
+    
+                    document.addEventListener('mousemove', mouseMoveHandler);
+                    document.addEventListener('mouseup', mouseUpHandler);
+                };
+    
+                const mouseMoveHandler = function (e) {
+                    // How far the mouse has been moved
+                    const dx = e.clientX - pos.x;
+                    const dy = e.clientY - pos.y;
+    
+                    // Scroll the element
+                    ele.scrollTop = pos.top - dy;
+                    ele.scrollLeft = pos.left - dx;
+                };
+    
+                const mouseUpHandler = function () {
+                    ele.style.cursor = 'grab';
+                    ele.style.removeProperty('user-select');
+    
+                    document.removeEventListener('mousemove', mouseMoveHandler);
+                    document.removeEventListener('mouseup', mouseUpHandler);
+                };
+    
+                // Attach the handler
+                ele.addEventListener('mousedown', mouseDownHandler);
+            });
+        </script>
+
+</body>
+
+</html>
